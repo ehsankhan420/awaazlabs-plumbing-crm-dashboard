@@ -1,0 +1,13 @@
+# Normalize line endings. Without this, a repo authored on Windows and deployed from a
+# Linux CI runner produces spurious whole-file diffs and noisy commit warnings.
+* text=auto eol=lf
+
+# Binary — never touch.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens. THEME_NOTES.md at the repo root is the single allowed source of
+ * color for this codebase. Every value below is documented there with its role and,
+ * for chart tokens, its measured contrast ratio and CVD validation result.
+ *
+ * Do not add a color here without adding it to THEME_NOTES.md first.
+ */
+:root {
+  /* --- Base UI tokens (verbatim from the original scaffold, unchanged) --- */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+
+  --card: 0 0% 100%;
+  --popover: 0 0% 100%;
+
+  /* --- Repaired tokens: referenced by existing code, never declared (THEME_NOTES §2) --- */
+  --input: 214.3 31.8% 91.4%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover-foreground: 222.2 84% 4.9%;
+
+  /*
+   * --- Categorical chart palette (THEME_NOTES §3) ---
+   * Fixed slot order; assigned in sequence, never cycled. Red is deliberately
+   * absent so a series can never impersonate reserved status red.
+   * Validated: worst adjacent CVD dE 24.2 (protan); target is >= 12.
+   * chart-2 and chart-3 are sub-3:1 vs the white surface, so the relief rule in
+   * THEME_NOTES §3 applies and is enforced structurally by ChartFrame.
+   */
+  --chart-1: #2a78d6; /* blue    4.42:1 */
+  --chart-2: #1baf7a; /* aqua    2.82:1  relief required */
+  --chart-3: #eda100; /* yellow  2.17:1  relief required */
+  --chart-4: #008300; /* green   4.95:1 */
+  --chart-5: #4a3aa7; /* violet  8.56:1 */
+  --chart-6: #eb6834; /* orange  3.20:1 */
+
+  /* --- Sequential ramp for heatmap magnitude (THEME_NOTES §4). One hue, monotone L. --- */
+  --seq-1: #cde2fb;
+  --seq-2: #86b6ef;
+  --seq-3: #3987e5;
+  --seq-4: #256abf;
+  --seq-5: #0d366b;
+
+  /*
+   * --- Reserved status (THEME_NOTES §5) ---
+   * Never usable as a categorical series. Always paired with an icon + text label,
+   * because amber sits at 1.83:1 by design and must never carry meaning alone.
+   * Critical red reuses --destructive rather than introducing a second red.
+   */
+  --status-warning: #fab219;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Visible keyboard focus everywhere; never remove the outline without replacing it. */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/*
+ * Screen-reader-only. Used by ChartFrame to expose every chart's underlying table,
+ * which is the relief channel that makes the sub-3:1 series colors legal.
+ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

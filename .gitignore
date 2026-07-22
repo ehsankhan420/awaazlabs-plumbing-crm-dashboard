@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+dist/
+build/
+out/
+.turbo/
+.vercel/
+
+# Local environment files - never commit real secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Logs and local OS/editor noise
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
